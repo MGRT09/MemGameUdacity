@@ -13,6 +13,24 @@
 
 <!---<button onclick="startGame()">Start Button</button>--->
 
+<h1 class="maintitle"> Memory Game!! </h1>   
+      
+<!-- A top section with introduction text a examples of links-->
+    
+    <div class="topsection"> 
+        <p>Some instructions on playing the game</p>
+        <ul>
+        <ul>
+            <button>Restart</button>
+        </ul>
+        <ul>
+             <a > Game Score </a>
+            </ul>
+        <ul>
+            <a > Star Rating </a>
+        </ul> 
+          </ul>  
+    </div>       
 <p id="demo">List of cards in deck for debug</p>
 
 
@@ -152,126 +170,89 @@ function endGame(){
     <section id='score'>0</section>
     <div class='responsive-border-center'></div>
 
+<!-- Use of flex to great resizable content - sorry about the awful colours, but trying to show I can control these via CSS used individual ids to allow seperate colours-->
+    
+    <ul class="flex-container">
+        <ul class="flex-item" id="road1">
+            <img id="card1" src="cardBack.png" alt="card" onclick="CardClick(this)">
+        </ul>
+        
+        <ul class="flex-item" id="mtb2">
+        <img id="card2" src="cardBack.png" alt="card" onclick="CardClick(this)">  
+        </ul>
+        
+        <ul class="flex-item" id="hybrid3">
+        <img id="card3" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+        </ul>
+        
+        
+        <ul class="flex-item" id="fix4">
+         <img id="card4" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
+        </ul>
+        
+          <ul class="flex-item" id="road1">
+            <img id="card5" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+        </ul>
+        
+        <ul class="flex-item" id="mtb2">
+        <img id="card6" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
+        </ul>
+        
+        <ul class="flex-item" id="hybrid3">
+        <img id="card7" src="cardBack.PNG" alt="card" onclick="CardClick(this)"> 
+        </ul>
+        
+        
+        <ul class="flex-item" id="fix4">
+         <img id="card8" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
+        </ul>
+        
+        
+          <ul class="flex-item" id="road1">
+            <img id="card9" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+        </ul>
+        
+        <ul class="flex-item" id="mtb2">
+        <img id="card10" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
+        </ul>
+        
+        <ul class="flex-item" id="hybrid3">
+        <img id="card11" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+        </ul>
+        
+        
+        <ul class="flex-item" id="fix4">
+         <img id="card12" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
+        </ul>
+        
+        
+          <ul class="flex-item" id="road1">
+            <img id="card13" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+        </ul>
+        
+        <ul class="flex-item" id="mtb2">
+        <img id="card14" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
+        </ul>
+        
+        <ul class="flex-item" id="hybrid3">
+        <img id="card15" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+        </ul>
+        
+        
+        <ul class="flex-item" id="fix4">
+         <img id="card16" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
+        </ul>
+    </ul>
+   <p>
+    <a href="http://jigsaw.w3.org/css-validator/check/referer">
+        <img style="border:0;width:88px;height:31px"
+            src="http://jigsaw.w3.org/css-validator/images/vcss"
+            alt="Valid CSS!" />
+    </a>
+</p>
+        
 
-
-    <section class='table'>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card1" src="cardBack.PNG" alt="card1" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card' >
-          <div class='front'></div>
-            <img id="card2" src="cardBack.PNG" alt="card2" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-           <img id="card3" src="cardBack.PNG" alt="card3" onclick="CardClick(this)">
-          <div class='back'></div>
-
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div id='front'  ></div>
-            <img id="card4" src="cardBack.PNG" alt="card4" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card5" src="cardBack.PNG" alt="card5" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card6" src="cardBack.PNG" alt="card6" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card7" src="cardBack.PNG" alt="card7" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card8" src="cardBack.PNG" alt="card8" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card9" src="cardBack.PNG" alt="card9" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card10" src="cardBack.PNG" alt="card10" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card11" src="cardBack.PNG" alt="card11" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card12" src="cardBack.PNG" alt="card12" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card13" src="cardBack.PNG" alt="card13" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card14" src="cardBack.PNG" alt="card14" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card15" src="cardBack.PNG" alt="card15" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-      <div class='container'>
-        <div class='card'>
-          <div class='front'></div>
-            <img id="card16" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
-          <div class='back'></div>
-        </div>
-      </div>
-    </section>
-    <div class='responsive-border-center'></div>
-    <section class='timer'></section>
-    <div class='responsive-border-back'></div>
+    
     <!---<script src='script.js'></script>--->
   </body>
 </html>
