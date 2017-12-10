@@ -1,0 +1,76 @@
+
+body {
+   font-family: Arial, sans-serif;
+    background: 
+        
+        /*url(http://www.shukatsu-note.com/wp-content/uploads/2014/12/computer-564136_1280.jpg) no-repeat;*/
+    background-size: cover;
+    height: 100vh;
+}
+ 
+.container {
+    float:left;
+    position: relative;
+    width: 10%;
+    padding-bottom: 10%; /* = width for a 1:1 aspect ratio */
+    margin: 7%;
+    overflow:hidden;
+}
+ 
+.card {
+    position:absolute;
+    height:40%; /* = 100% - 2*10% padding */
+    width:40%; /* = 100% - 2*5% padding */
+    padding: 5% 5%;
+}
+ 
+.table {
+    background: blue;
+    width: 50%;
+    border: yes;
+}
+ 
+ 
+.overlay {
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+ 
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+ 
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+    width: 30%;
+    position relative;
+    transition: all 5s ease-in-out;
+ 
+}
+ 
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #333;
+}
+ 
+#img {
+    height: 25%;
+    width: 25%;
+}

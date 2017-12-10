@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!---PLEASE NOTE THIS IS NOT COMPLETE AND I AM WORKING ON IT AS WE SPEAK - BE GENTLE I AM VERY NEW TO THIS--->
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Memory Game</title>
+    <link rel='stylesheet' href='style.css'/>
+    <script   src="https://code.jquery.com/jquery-3.2.1.js"   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="   crossorigin="anonymous"></script>
+    </head>
+
+<!--- load the first function with the page --->
+  <body onload="startGame()">
+
+<!---<button onclick="startGame()">Start Button</button>--->
+
+<p id="demo">List of cards in deck for debug</p>
+
+
+<button onclick="endGame()">Just for Test popup at end of game</button>
+
+
+<script>
+/*Array storing all of the cards in the deck */
+var deck = ["CardA.PNG", "CardB.PNG", "CardC.PNG", "CardD.PNG", "CardE.PNG", "CardF.PNG", "CardG.PNG", "CardH.PNG", "CardA.PNG", "CardB.PNG", "CardC.PNG", "CardD.PNG", "CardE.PNG", "CardF.PNG", "CardG.PNG", "CardH.PNG"];
+
+/* Variables */     
+var ClickNum = 0;
+var DeckPosOne = "";
+var DeckPosTwo = "";
+var firstCardClicked = "";
+var secondCardClicked = "";
+var gameScore = 0;
+var pairCount = 0;
+var cardList = [];
+var cardCount = 0;
+
+    
+/* Start of game, shuffle deck and display the deck array to help with debugging */
+    
+function startGame() {
+   shuffle(deck);
+   deck.toString();
+   //alert(deck);
+
+   document.getElementById("demo").innerHTML = deck;
+   //document.getElementById('card4').src = deck[3];
+   //console.log(deck[]);
+   return deck;
+
+}
+/* shuffle function */
+function shuffle(array) {
+var i = 0
+var j = 0
+var temp = null
+
+for (i = array.length - 1; i > 0; i -= 1) {
+   j = Math.floor(Math.random() * (i + 1))
+   temp = array[i]
+   array[i] = array[j]
+   array[j] = temp
+}
+}
+    
+/* Function that comes from the onclick of a card 
+Takes card id and aligns it with card in the array
+then in theory displays the card before going to do a card comparison */
+    
+function CardClick(item){
+ 
+
+    
+            if (cardCount === 0){
+                cardList[0] = $(item).attr("id");
+                //alert(cardCount);
+                cardCount ++;
+                DeckPosOne = cardList[0].match(/\d/g).join("");
+                document.getElementById(cardList[0]).src = deck[DeckPosOne-1];
+                
+                return DeckPosOne;
+
+            } else if (cardCount === 1) {
+                cardList[1] = $(item).attr("id");
+                DeckPosTwo = cardList[1].match(/\d/g).join("");
+                document.getElementById(cardList[1]).src = deck[DeckPosTwo-1];
+                //alert(cardCount);
+                cardCount = 0;
+                gameScore ++;
+                //displayClicks();
+                compareCards();
+                document.getElementById("score").innerHTML = gameScore;
+            }
+        
+    
+  
+}
+    
+  /* Function to compare the cards, if the same Snap and display a match png file, or no match return to cardBack */
+    
+function compareCards(){
+    
+    if (deck[DeckPosOne-1] == deck[DeckPosTwo-1]){
+        //alert(deck[DeckPosTwo-1], deck[DeckPosOne-1] );
+        alert("SNAP");
+        document.getElementById(cardList[0]).src = "Match.PNG";
+        document.getElementById(cardList[1]).src = "Match.PNG";
+    } else {
+        document.getElementById(cardList[0]).src = "cardBack.PNG";
+        document.getElementById(cardList[1]).src = "cardBack.PNG";
+    }
+}
+    
+/*    
+function displayClicks(){
+    for (var arraycount = 0; arraycount < cardList.length; arraycount++) {
+        alert("card " + cardList[arraycount]);
+    }
+}
+*/
+  
+    
+function endGame(){
+    //alert("Into End game function");
+    //Need a pop up to show Final Score
+    //Time and Play again button.
+    $('#game-over').show();
+    document.getElementById("final-score").innerHTML += gameScore;
+}
+
+
+
+</script>
+
+
+
+    <section id='game-over' class="popup"  style="display: none">
+       <!--- <div class="popup">--->
+        <!---Need this to pop up at the end and hidden during game play--->
+      <a class="close" href="#">&times;</a>
+      <h1>END OF THE GAME</h1>
+
+      <h2 id='final-score'>Final Score is </h2>
+      <h2 class='time'>Time</h2>
+      <button class="play-again" id="playMore">Play Again</button>
+      <button class="close-button" id="closeDown">Close Button</button>
+        <!---</div>--->
+    </section>
+
+
+    <div class='responsive-border-back'></div>
+    <p>Game Score</p>
+    <section id='score'>0</section>
+    <div class='responsive-border-center'></div>
+
+
+
+    <section class='table'>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card1" src="cardBack.PNG" alt="card1" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card' >
+          <div class='front'></div>
+            <img id="card2" src="cardBack.PNG" alt="card2" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+           <img id="card3" src="cardBack.PNG" alt="card3" onclick="CardClick(this)">
+          <div class='back'></div>
+
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div id='front'  ></div>
+            <img id="card4" src="cardBack.PNG" alt="card4" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card5" src="cardBack.PNG" alt="card5" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card6" src="cardBack.PNG" alt="card6" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card7" src="cardBack.PNG" alt="card7" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card8" src="cardBack.PNG" alt="card8" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card9" src="cardBack.PNG" alt="card9" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card10" src="cardBack.PNG" alt="card10" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card11" src="cardBack.PNG" alt="card11" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card12" src="cardBack.PNG" alt="card12" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card13" src="cardBack.PNG" alt="card13" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card14" src="cardBack.PNG" alt="card14" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card15" src="cardBack.PNG" alt="card15" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+      <div class='container'>
+        <div class='card'>
+          <div class='front'></div>
+            <img id="card16" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+          <div class='back'></div>
+        </div>
+      </div>
+    </section>
+    <div class='responsive-border-center'></div>
+    <section class='timer'></section>
+    <div class='responsive-border-back'></div>
+    <!---<script src='script.js'></script>--->
+  </body>
+</html>
