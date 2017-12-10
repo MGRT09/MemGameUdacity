@@ -74,3 +74,25 @@ body {
     height: 25%;
     width: 25%;
 }
+
+.flex-container {
+    min-height: 80%;
+    max-width: 522px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.flex-container > ul {
+  display: flex; 
+  height: 100px;
+    
+  justify-content: center;
+  flex-direction: column;
+}
+
+.flex-container > ul > img {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
