@@ -18,28 +18,19 @@
 <!-- A top section with introduction text a examples of links-->
     
     <div class="topsection"> 
-        <p>Some instructions on playing the game</p>
-        <ul>
-        <ul>
-            <button>Restart</button>
-        </ul>
-        <ul>
-             <a > Game Score </a>
-            </ul>
-        <ul>
-            <a > Star Rating </a>
-        </ul> 
-          </ul>  
+        <p>Simply match all the pairs of cards. Start the game by pressing 'Start the clock'</p>
+       
+    <button onclick="reStart()">Restart</button>
     </div>       
-<p id="demo">List of cards in deck for debug</p>
-
-
+<!---Debugging items - uncomment to see card array after shuffle--->
+<!---<p id="demo">List of cards in deck for debug</p>--->
 <button onclick="endGame()">Just for Test popup at end of game</button>
 
 
 <script>
 /*Array storing all of the cards in the deck */
 var deck = ["CardA.PNG", "CardB.PNG", "CardC.PNG", "CardD.PNG", "CardE.PNG", "CardF.PNG", "CardG.PNG", "CardH.PNG", "CardA.PNG", "CardB.PNG", "CardC.PNG", "CardD.PNG", "CardE.PNG", "CardF.PNG", "CardG.PNG", "CardH.PNG"];
+
 
 /* Variables */     
 var ClickNum = 0;
@@ -51,6 +42,7 @@ var gameScore = 0;
 var pairCount = 0;
 var cardList = [];
 var cardCount = 0;
+var finalTime = 0;
 
     
 /* Start of game, shuffle deck and display the deck array to help with debugging */
@@ -59,10 +51,10 @@ function startGame() {
    shuffle(deck);
    deck.toString();
    //alert(deck);
-
-   document.getElementById("demo").innerHTML = deck;
+   //document.getElementById("demo").innerHTML = deck;
    //document.getElementById('card4').src = deck[3];
    //console.log(deck[]);
+    //start();
    return deck;
 
 }
@@ -84,10 +76,7 @@ for (i = array.length - 1; i > 0; i -= 1) {
 Takes card id and aligns it with card in the array
 then in theory displays the card before going to do a card comparison */
     
-function CardClick(item){
- 
-
-    
+function CardClick(item){ 
             if (cardCount === 0){
                 cardList[0] = $(item).attr("id");
                 //alert(cardCount);
@@ -100,13 +89,23 @@ function CardClick(item){
             } else if (cardCount === 1) {
                 cardList[1] = $(item).attr("id");
                 DeckPosTwo = cardList[1].match(/\d/g).join("");
+                document.getElementById("score").innerHTML = gameScore;
+                <!---The line of code bleow is not executing --->
                 document.getElementById(cardList[1]).src = deck[DeckPosTwo-1];
+                
+                
                 //alert(cardCount);
                 cardCount = 0;
                 gameScore ++;
                 //displayClicks();
                 compareCards();
                 document.getElementById("score").innerHTML = gameScore;
+              
+                    if (pairCount === 8){
+                        endGame();
+                    }
+                
+                return DeckPosTwo;
             }
         
     
@@ -122,6 +121,7 @@ function compareCards(){
         alert("SNAP");
         document.getElementById(cardList[0]).src = "Match.PNG";
         document.getElementById(cardList[1]).src = "Match.PNG";
+        pairCount ++;
     } else {
         document.getElementById(cardList[0]).src = "cardBack.PNG";
         document.getElementById(cardList[1]).src = "cardBack.PNG";
@@ -141,114 +141,169 @@ function endGame(){
     //alert("Into End game function");
     //Need a pop up to show Final Score
     //Time and Play again button.
-    $('#game-over').show();
+    stopTimer();
+    starRating();
+    $('#popModal').show();
     document.getElementById("final-score").innerHTML += gameScore;
+    document.getElementById("time").innerHTML += finalTime;
 }
 
 
+    
+/* Code for timer */
+function changeValue() {
+  document.getElementById("testTimer").innerHTML = ++value;
+}
 
+var timerInterval = null;
+function start() {
+  stop(); // stoping the previous counting (if any)
+  value = 0;
+  timerInterval = setInterval(changeValue, 1000);  
+}
+    
+function stopTimer() {
+  clearInterval(timerInterval);
+  finalTime = value;
+    //alert(finalTime);
+    
+  return finalTime;
+}
+    
+    
+function starRating(){
+    if (gameScore < 20){
+       document.getElementById("rating").innerHTML += "3 Stars!";
+    } else if (gameScore >= 20 & gameScore <= 60){
+        document.getElementById("rating").innerHTML += "2 Stars!";
+    } else {
+        document.getElementById("rating").innerHTML += "1 Star!";
+    }
+}
+    
+    
+function reStart(){
+    //reset all cards and scores and reshuffle the deck
+    //alert("You want to restart?")
+    stopTimer();
+    gameScore = 0;
+    document.getElementById("score").innerHTML = gameScore;
+    document.getElementById("testTimer").innerHTML = 0;
+    document.getElementById('popModal').style.display='none';
+    var numberCards = 1;
+    while (numberCards < 17){
+        //alert(numberCards);
+     document.getElementById('card'+numberCards).src = "cardBack.PNG"; 
+    numberCards++;
+    }
+    
+}
+    
+    
+    
 </script>
 
 
-
-    <section id='game-over' class="popup"  style="display: none">
-       <!--- <div class="popup">--->
+<!--- Hidden section that pops up via a modal to show end score and time and rating --->
+    <div id='popModal' class="modal"  style="display: none">
+      <div class="modal-content">
         <!---Need this to pop up at the end and hidden during game play--->
-      <a class="close" href="#">&times;</a>
+      <a class="close" href="#" onclick="document.getElementById('popModal').style.display='none'">&times;</a>  
       <h1>END OF THE GAME</h1>
-
+        
       <h2 id='final-score'>Final Score is </h2>
-      <h2 class='time'>Time</h2>
-      <button class="play-again" id="playMore">Play Again</button>
-      <button class="close-button" id="closeDown">Close Button</button>
-        <!---</div>--->
-    </section>
+      <h2 id='time'>Final Time is </h2>
+      <h2 id="rating">Star Rating is </h2>
+      <button class="play-again" id="playMore" onclick="reStart()">Play Again</button>
+      <button class="close-button" id="closeDown" onclick="document.getElementById('popModal').style.display='none'">Close Button</button>
+        </div>
+    </div>
 
 
-    <div class='responsive-border-back'></div>
+    <div></div>
     <p>Game Score</p>
-    <section id='score'>0</section>
-    <div class='responsive-border-center'></div>
+    <a id='score'>0</a>
+    <p>Game Time</p>
+    <a id="testTimer"></a>
+    <br>
+    <button onclick="start()">Start The clock</button>
+    <div></div>
 
-<!-- Use of flex to great resizable content - sorry about the awful colours, but trying to show I can control these via CSS used individual ids to allow seperate colours-->
+<!-- Use of flex to great resizable content -->
     
     <ul class="flex-container">
-        <ul class="flex-item" id="road1">
+        <ul class="flex-item" id="pos1">
             <img id="card1" src="cardBack.png" alt="card" onclick="CardClick(this)">
         </ul>
         
-        <ul class="flex-item" id="mtb2">
+        <ul class="flex-item" id="pos2">
         <img id="card2" src="cardBack.png" alt="card" onclick="CardClick(this)">  
         </ul>
         
-        <ul class="flex-item" id="hybrid3">
+        <ul class="flex-item" id="pos3">
         <img id="card3" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
         </ul>
         
         
-        <ul class="flex-item" id="fix4">
+        <ul class="flex-item" id="pos4">
          <img id="card4" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
         </ul>
         
-          <ul class="flex-item" id="road1">
+          <ul class="flex-item" id="pos5">
             <img id="card5" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
         </ul>
         
-        <ul class="flex-item" id="mtb2">
+        <ul class="flex-item" id="pos6">
         <img id="card6" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
         </ul>
         
-        <ul class="flex-item" id="hybrid3">
+        <ul class="flex-item" id="pos7">
         <img id="card7" src="cardBack.PNG" alt="card" onclick="CardClick(this)"> 
         </ul>
         
         
-        <ul class="flex-item" id="fix4">
+        <ul class="flex-item" id="pos8">
          <img id="card8" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
         </ul>
         
         
-          <ul class="flex-item" id="road1">
-            <img id="card9" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
+        <ul class="flex-item" id="pos9">
+        <img id="card9" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
         </ul>
         
-        <ul class="flex-item" id="mtb2">
+        <ul class="flex-item" id="pos10">
         <img id="card10" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
         </ul>
         
-        <ul class="flex-item" id="hybrid3">
+        <ul class="flex-item" id="pos11">
         <img id="card11" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
         </ul>
         
         
-        <ul class="flex-item" id="fix4">
+        <ul class="flex-item" id="pos12">
          <img id="card12" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
         </ul>
         
         
-          <ul class="flex-item" id="road1">
+          <ul class="flex-item" id="pos13">
             <img id="card13" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
         </ul>
         
-        <ul class="flex-item" id="mtb2">
+        <ul class="flex-item" id="pos14">
         <img id="card14" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
         </ul>
         
-        <ul class="flex-item" id="hybrid3">
+        <ul class="flex-item" id="pos15">
         <img id="card15" src="cardBack.PNG" alt="card" onclick="CardClick(this)">
         </ul>
         
         
-        <ul class="flex-item" id="fix4">
+        <ul class="flex-item" id="pos16">
          <img id="card16" src="cardBack.PNG" alt="card" onclick="CardClick(this)">  
         </ul>
     </ul>
    <p>
-    <a href="http://jigsaw.w3.org/css-validator/check/referer">
-        <img style="border:0;width:88px;height:31px"
-            src="http://jigsaw.w3.org/css-validator/images/vcss"
-            alt="Valid CSS!" />
-    </a>
+    
 </p>
         
 
