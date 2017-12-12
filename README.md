@@ -23,3 +23,4 @@ The following line of code does not seem to execute when run.
 
 ### License
 LICENSE.txt contains the license file for this work
+This work is released under the MIT License
