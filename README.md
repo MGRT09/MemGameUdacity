@@ -19,7 +19,8 @@ Simply copy all the files into a single directory and run the html file.
 
 ### Bugs
 The following line of code does not seem to execute when run. 
-```shsome code line```
+It is within the XX function, in the else if statement. 
+```document.getElementById(cardList[1]).src = deck[DeckPosTwo-1];```
 
 ### License
 LICENSE.txt contains the license file for this work
