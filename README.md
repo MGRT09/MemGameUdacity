@@ -18,6 +18,7 @@ The following files make up the game:
 Simply copy all the files into a single directory and run the html file.
 
 ### Bugs
+####Update - Bug fixed with time lag - Thanks to Andrew_R at Udacity. 
 The following line of code does not seem to execute when run. 
 It is within the CardClick() function, in the else if statement. 
 ```document.getElementById(cardList[1]).src = deck[DeckPosTwo-1];```
