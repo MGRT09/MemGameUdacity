@@ -10,7 +10,7 @@ var pairCount = 0;
 var cardList = [];
 var cardCount = 0;
 var finalTime = 0;
-
+var value = 0;
     
 /* Start of game, shuffle deck and display the deck array to help with debugging */
     
@@ -66,19 +66,27 @@ function CardClick(item){
                 DeckPosTwo = cardList[1].match(/\d/g).join("");
                 document.getElementById("score").innerHTML = gameScore;
                 <!---The line of code bleow is not executing --->
-                document.getElementById(cardList[1]).src = deck[DeckPosTwo-1];
+               
                 
+                document.getElementById(cardList[1]).src = deck[DeckPosTwo-1];
+                 
                 
                 //alert(cardCount);
+                
+               
                 cardCount = 0;
+             
+                
                 gameScore ++;
                 //displayClicks();
-                compareCards();
+               
+                 setTimeout(function(){compareCards();},500);
+                   
+                
+                
                 document.getElementById("score").innerHTML = gameScore;
               
-                    if (pairCount === 8){
-                        endGame();
-                    }
+                
                 
                 return DeckPosTwo;
             }
@@ -97,6 +105,10 @@ function compareCards(){
         document.getElementById(cardList[0]).src = "Match.PNG";
         document.getElementById(cardList[1]).src = "Match.PNG";
         pairCount ++;
+        //alert(pairCount);    
+        if (pairCount === 8){
+                        endGame();
+                    }
     } else {
         document.getElementById(cardList[0]).src = "cardBack.PNG";
         document.getElementById(cardList[1]).src = "cardBack.PNG";
